@@ -15,6 +15,10 @@ describe("Sqlite", function() {
     this.connection = getConnection();
   });
 
+  after(function() {
+    this.connection.disconnect();
+  });
+
   describe(".constructor()", function() {
 
     it("allows to inject a dialect instance", function() {
@@ -106,6 +110,7 @@ describe("Sqlite", function() {
         expect(connection.client()).toBe(undefined);
         yield connection.connect();
         expect(connection.client()).toBeAn('object');
+        connection.disconnect();
       }.bind(this)).then(function() {
         done();
       });
@@ -167,7 +172,7 @@ describe("Sqlite", function() {
         var gallery = cursor.next();
         expect(gallery.name).toBe('updated gallery');
 
-        expect(yield schema.truncate({ id: id })).toBe(true);
+        expect(yield schema.remove({ id: id })).toBe(true);
 
         var cursor = yield this.connection.query('SELECT "name" FROM "gallery" WHERE "id" = ' + id);
         expect(cursor.valid()).toBe(false);
@@ -185,7 +190,7 @@ describe("Sqlite", function() {
       }.bind(this)).then(function() {
         expect(false).toBe(true);
       }).catch(function(err) {
-        expect(err.message).toMatch(/SQLITE_ERROR: near "FROM": syntax error/);
+        expect(err.code).toBe('SQLITE_ERROR');
         done();
       });
 

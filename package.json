@@ -1,6 +1,6 @@
 {
   "name": "chaos-database-sqlite",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "SQLite adapter for Chaos ORM.",
   "license": "MIT",
   "repository": {
@@ -14,19 +14,19 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "chaos-database": "^14.0",
+    "chaos-database": "^15.0",
     "co": "^4.6.0",
     "extend-merge": "^1.0.5",
     "sql-dialect": "^4.0",
-    "sqlite3": "^3.1.8"
+    "sqlite3": "^4.0.2"
   },
   "devDependencies": {
-    "bluebird": "^3.5.0",
+    "bluebird": "^3.5.2",
     "chai-kahlan": "^1.0.4",
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.2",
     "jasmine-kahlan": "^1.0.2",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.2"
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1"
   },
   "scripts": {
     "coverage-report": "nyc --reporter=lcov mocha",
